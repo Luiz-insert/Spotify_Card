@@ -1,0 +1,176 @@
+body {
+    display: flex;
+    box-sizing: border-box;
+    height: 100vh;
+}
+/*Pequeno furo na parte superior*/
+.furo {
+    min-height: 20px;
+    max-height: 20px;
+    background-color: white;
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    width: 90px;
+    border-radius: 1em;
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
+}
+/*Lado1 do cartão*/
+#container_side1 {
+    display: flex;
+    flex-direction: column;
+    margin: auto auto;
+    background-color: #08C367;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px; 
+    min-height: 540px;
+    height: 90vh;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
+}
+/*Logotipo-Spotfy*/
+#logo {
+    display: flex;
+    background-image: url(./spotify-logo.png);
+    width: 120px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-family: 'Rubik', sans-serif;
+}
+/*Div do campo de texto*/
+#divInputSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+/*Campo de texto*/
+#search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    border-radius: 8px;
+    width: auto;
+    border-color: black;
+    margin-top: 1em;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50); 
+    outline: none;
+}
+#search:focus::placeholder {
+    color: transparent;
+}
+#submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    width: 96px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    border: none;
+    margin-top: 1em;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    background-color: black;
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50); 
+    transition: 0.3s;
+    
+}
+#submitBtn:hover {
+    color: black;
+    border: black solid 2px ;
+    background: rgba( 255, 255, 255, 0.35 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    transition: 0.3s;
+}
+/*Div da foto quadrado com cantos arredondados*/
+#divContainerPhoto {
+    width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border: 2px solid black;
+}
+/*Div da foto com radius 100% arredondados para formar um circulo*/
+#imgPhoto {
+    display: flex;
+    box-sizing: border-box;
+    background-color: white;
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    min-width: 230px;
+    max-width: 230px;
+    height: 230px;
+    min-height: 230px;
+    max-height: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100%;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    
+}
+/*Div dos dados1 que vão ser requisitados*/
+#divDataFront {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    border-radius: 8px;
+    width: 250px;
+    min-height: 24px;
+    height: 18vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    color: black;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
+    border: 2px solid black;
+    gap: 16px;
+}
+#replace_side1 {
+    display: flex;
+    width: 32px;
+    height: 16px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 16px;
+    background: rgba( 255, 255, 255, 0.35 );
+    border: 2px solid black;
+    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
+    border-radius: 8px;
+    cursor: pointer;
+    
+}
+
+.pReplace {
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
