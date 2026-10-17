@@ -61,7 +61,3 @@ O projeto também está conectado ao GitHub: cada push na `master` gera um deplo
 | `backend/server.js` | Servidor estático local (só para desenvolvimento) |
 
 O Spotify Code é a imagem gerada pelo próprio Spotify em `scannables.scdn.co`. A página também carrega o script do Coddara Analytics para contar visitas.
-
-## Observação de segurança
-
-Uma versão antiga deste projeto tinha o `client_secret` dentro do `index.js`, e ele continua no histórico do Git. Gere um novo em **Settings → Rotate client secret** no Dashboard.
