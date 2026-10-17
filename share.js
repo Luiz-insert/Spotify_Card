@@ -11,6 +11,14 @@ const shareLabel = document.getElementById('shareLabel');
 // compartilhar logo após o clique, e gerar a imagem leva um tempinho).
 let readyFile = null;
 
+// Rejeita se a promessa não terminar no prazo (nada pode deixar o botão "carregando" para sempre).
+function withTimeout(promise, ms) {
+    return Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error(`Tempo esgotado (${ms} ms)`)), ms)),
+    ]);
+}
+
 const isBackVisible = () => badge.classList.contains('flipped');
 
 function currentSide() {
@@ -36,10 +44,13 @@ async function renderSide(card) {
     footer.textContent = window.location.host;
     clone.querySelector('.actions').replaceChildren(footer);
 
+    // Imagens "lazy" fora da tela podem nunca carregar (Safari): força o carregamento.
+    clone.querySelectorAll('img').forEach((img) => { img.loading = 'eager'; });
+
     stage.append(clone);
     document.body.append(stage);
     try {
-        await Promise.all([...clone.querySelectorAll('img')].map((img) => img.decode().catch(() => {})));
+        await Promise.all([...clone.querySelectorAll('img')].map((img) => withTimeout(img.decode(), 3000).catch(() => {})));
         return await htmlToImage.toCanvas(clone, {
             pixelRatio: SHARE_PIXEL_RATIO,
             width: BADGE_WIDTH,
@@ -125,7 +136,7 @@ async function onShareClick() {
             return;
         }
         setShareState('busy');
-        const file = await buildShareImage(currentSide());
+        const file = await withTimeout(buildShareImage(currentSide()), 25000);
         if (await shareFile(file)) {
             setShareState('idle');
         } else {

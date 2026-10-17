@@ -288,7 +288,6 @@ function displayTopTracks(tracks) {
         const cover = document.createElement("img");
         cover.className = "coverVerse";
         cover.alt = "";
-        cover.loading = "lazy";
         const images = track.album?.images || [];
         if (images.length) cover.src = images[images.length - 1].url;
 
