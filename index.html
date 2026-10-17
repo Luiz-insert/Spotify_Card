@@ -1,105 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧙🏻‍♂️ Spotify Card</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="lado1.css">
     <link rel="stylesheet" href="lado2.css">
 
+    <script defer src="vendor/qrcode.js"></script>
     <script defer src="index.js"></script>
     <script defer src="main.js"></script>
-    <title>🧙🏻‍♂️Spotfy_Card</title>
+    <script defer src="vendor/html-to-image.js"></script>
+    <script defer src="share.js"></script>
+    <!-- Analytics: depois do index.js, que já limpa o ?code= do login da URL antes do registro da visita -->
+    <script defer src="https://analytics.coddara.com/t.js" data-token="2181b26649683827eff11e6651994e88"></script>
 </head>
 <body>
-    <div id="container_side1">
-        <div class="furo"></div>
-        <div id="divInputSearch">
-            <label for="search">
-                <div id="logo"></div>
-            </label>
-            <input type="text" id="search" placeholder="Your user token" value="">
-            <button onclick="spotfy()" id="submitBtn">Submit</button>
-        </div>
-        <div id="divContainerPhoto">
-            <div id="divPhoto"> 
-                <img id="imgPhoto">
-            </div>
-        </div>
-        <div id="divDataFront">
-            <div class="infoFront"><p class="dataFront1 user">DisplayName</p></div>
-            <div class="infoFront"><p class="dataFront2 email">UserEmail</p></div>
-        </div>
-        <div id="replace_side1">
-            <p class="pReplace pReplace1">➡</p>
+    <!-- Tela inicial: só aparece enquanto não há login -->
+    <section id="loginScreen" class="loginScreen">
+        <div class="logo logoLarge" role="img" aria-label="Spotify"></div>
+        <h1 class="loginTitle">Seu crachá musical</h1>
+        <p class="loginText">Perfil, QR code e seu top 10, direto da sua conta.</p>
+        <button type="button" id="loginBtn" class="btn btnLarge">Entrar com Spotify</button>
+        <p id="loginStatus" class="status" role="status"></p>
+    </section>
+
+    <div id="cardArea" class="cardArea" hidden>
+        <main id="badge" class="badge">
+            <!-- Lado 1: perfil -->
+            <section id="container_side1" class="card front" aria-label="Perfil">
+                <div class="furo"></div>
+                <div class="logo" role="img" aria-label="Spotify"></div>
+                <p id="status" class="status" role="status"></p>
+                <div class="profile">
+                    <div id="divContainerPhoto">
+                        <img id="imgPhoto" src="placeholder.svg" alt="Foto de perfil">
+                    </div>
+                    <div id="divDataFront">
+                        <p class="dataFront name" id="displayName">…</p>
+                        <p class="dataFront email" id="userEmail"></p>
+                    </div>
+                    <!-- QR code (câmera do celular) + Spotify Code (app do Spotify) -->
+                    <a id="codes" class="codes" target="_blank" rel="noopener" title="Abrir perfil no Spotify" hidden>
+                        <span id="qrCode" class="qrCode" aria-hidden="true"></span>
+                        <img id="spotifyCode" class="spotifyCode" alt="Spotify Code do perfil">
+                    </a>
+                </div>
+                <div class="actions">
+                    <button type="button" id="replace_side1" class="btn btnGhost">Top 10 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                </div>
+            </section>
+
+            <!-- Lado 2: top 10 -->
+            <section id="container_side2" class="card back" aria-label="Top 10 músicas" inert>
+                <div class="furo"></div>
+                <div class="logo" role="img" aria-label="Spotify"></div>
+                <div class="divUser">
+                    <p id="userid">…</p>
+                </div>
+                <div id="infoType">
+                    <button type="button" id="rangePrev" class="rangeBtn" aria-label="Período mais curto"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+                    <p class="dataVerseHeader" aria-live="polite"><strong>TOP 10</strong> <span id="rangeLabel">últimos ~6 meses</span></p>
+                    <button type="button" id="rangeNext" class="rangeBtn" aria-label="Período mais longo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+                </div>
+                <ol id="divDataVerse">
+                    <li class="InfoVerse empty">Carregando...</li>
+                </ol>
+                <div class="actions">
+                    <button type="button" id="replace_side2" class="btn btnGhost"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Perfil</button>
+                </div>
+            </section>
+        </main>
+        <div class="cardControls">
+            <button type="button" id="logoutBtn" class="btn btnGhost">Sair</button>
+            <button type="button" id="shareBtn" class="btn shareBtn">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+                <span id="shareLabel">Compartilhar perfil</span>
+            </button>
         </div>
     </div>
-    <div id="container_side2">
-        <div class="furo"></div>
-        <div id="divInputSearch">
-            <div for="search">
-                <div id="logo"></div>
-            </div>
-        </div>
-        <div class="divUser">
-            <p id="userid" class="user">UserName</p>
-        </div>
-        <div id="infoType">
-            <p class="dataVerseHeader">TOP 10 
-                | ~ 6 meses</p>
-        </div>
-        <div id="divDataVerse">
-
-            <div class="InfoVerse">
-                <p class="artistVerse1 artistVerse">Artist</p>
-                <p class="musicVerse1 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse2 artistVerse">Artist</p>
-                <p class="musicVerse2 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse3 artistVerse">Artist</p>
-                <p class="musicVerse3 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse4 artistVerse">Artist</p>
-                <p class="musicVerse4 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse5 artistVerse">Artist</p>
-                <p class="musicVerse5 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse6 artistVerse">Artist</p>
-                <p class="musicVerse6 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse7 artistVerse">Artist</p>
-                <p class="musicVerse7 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse8 artistVerse">Artist</p>
-                <p class="musicVerse8 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse9 artistVerse">Artist</p>
-                <p class="musicVerse9 musicVerse">-Music</p>
-            </div>
-            <div class="InfoVerse">
-                <p class="artistVerse10 artistVerse">Artist</p>
-                <p class="musicVerse10 musicVerse">-Music</p>
-            </div>
-            
-        </div>
-        <div id="replace_side2">
-            <p class="pReplace pReplace2">⬅</p>
-        </div>
-    </div>
-
 </body>
 </html>

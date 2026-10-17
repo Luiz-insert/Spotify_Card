@@ -1,0 +1,2 @@
+# Só o site estático vai para a Vercel; o servidor local não é necessário lá.
+backend/

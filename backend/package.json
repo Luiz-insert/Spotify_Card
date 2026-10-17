@@ -1,16 +1,12 @@
 {
-  "name": "programacaospotfyapi",
+  "name": "spotify-card",
   "version": "1.0.0",
-  "description": "",
-  "main": "node.js",
+  "description": "Cartão com perfil e top 10 músicas do Spotify",
+  "main": "server.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.1",
-    "querystring": "^0.2.1",
-    "request": "^2.88.2"
-  }
+  "license": "ISC"
 }

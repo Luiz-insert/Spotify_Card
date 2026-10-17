@@ -1,165 +1,149 @@
-body {
-    display: flex;
-    height: 100vh;
-    box-sizing: border-box;
-}
-/*Pequeno furo na parte superior*/
-.furo {
-    min-height: 20px;
-    max-height: 20px;
-    background-color: white;
-    border: 2px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    width: 90px;
-    border-radius: 1em;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
-}
-/*Lado1 do cartão*/
-#container_side2 {
-    display: flex;
-    flex-direction: column;
-    margin: auto auto;
-    background-color: #08C367;
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px; 
-    min-height: 540px;
-    height: 90vh;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
-}
-/*Logotipo-Spotfy*/
-#logo {
-    display: flex;
-    background-image: url(./spotify-logo.png);
-    width: 120px;
-    height: 32px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    font-family: 'Rubik', sans-serif;
-}
-/*Div do campo de texto*/
-#divInputSearch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2em;
-    margin-bottom: 1em;
-}
-/*Campo de texto*/
-#search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24px;
-    border-radius: 8px;
-    width: auto;
-    border-color: black;
-    margin-top: 1em;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-    background-color: white;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50); 
-}
+/*Lado 2 do cartão (os estilos comuns ficam em lado1.css)*/
 .divUser {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0em;
-    margin-bottom: 1em;
-    
+    justify-content: center;
+    width: 100%;
+    margin: 6px 0 10px;
 }
 #userid {
-    display: flex;
-    background-color: red;
-    width: auto;
-    height: 42px;
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    align-items: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    
-    background-color: black;
+    max-width: 100%;
+    padding: 9px 14px;
+    font-size: 15px;
+    font-weight: 700;
     color: white;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50); 
-    border-color: black;
+    background-color: var(--ink);
     border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 #infoType {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px 6px;
+    text-align: center;
     background-color: white;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    height: 42px;
-    width: 250px;
+    border: var(--border);
     border-radius: 8px;
-    border: 2px solid black;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
-    
+    box-shadow: var(--shadow);
 }
 .dataVerseHeader {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+}
+/*Setas que trocam o período do top 10*/
+.rangeBtn {
     display: flex;
     align-items: center;
-    color: black;
-    font-size: 24px;
-    font-family: 'Rubik', sans-serif;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: var(--ink);
+    background: none;
+    border: none;
+    border-radius: 6px;
+    opacity: 0.45;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.12s;
 }
+.rangeBtn .icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 3;
+}
+.rangeBtn:hover {
+    opacity: 1;
+}
+.rangeBtn:active {
+    transform: scale(0.85);
+}
+.rangeBtn:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--ink);
+}
+/*Enquanto troca de período*/
+#divDataVerse.loading {
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+.dataVerseHeader strong {
+    font-size: 20px;
+    font-weight: 700;
+}
+.dataVerseHeader span {
+    font-size: 12px;
+    opacity: 0.7;
+}
+/*Lista do top 10*/
 #divDataVerse {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 250px;
-    height: 45vh;
-    background-color: white;
-    background: rgba( 255, 255, 255, 0.35 );
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
-    border: 2px solid black;
-    border-radius: 8px;
-    row-gap: 12px;
-    
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    padding: 6px;
+    overflow-y: auto;
+    background: var(--glass);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 .InfoVerse {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 18px 28px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    align-items: center;
+    /*As linhas dividem igualmente a altura da lista (sem sobrar espaço embaixo)*/
+    flex: 1 0 auto;
+    padding: 2px 4px;
+    border-radius: 6px;
 }
-.artistVerse {
-    font-family: 'Rubik', sans-serif;
+.InfoVerse:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+.rankVerse {
+    grid-row: 1 / 3;
     font-size: 12px;
-    font-weight: bolder;
+    font-weight: 700;
+    text-align: right;
+}
+.coverVerse {
+    grid-row: 1 / 3;
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+}
+.musicVerse,
+.artistVerse {
+    grid-column: 3;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .musicVerse {
-    font-family: 'Rubik', sans-serif;
-    font-size: 12px;
-    font-weight: bolder;
+    font-size: 13px;
+    font-weight: 700;
 }
-#replace_side2 {
-    display: flex;
-    width: 32px;
-    height: 16px;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: 16px;
-    background: rgba( 255, 255, 255, 0.35 );
-    border: 2px solid black;
-    box-shadow: 5px 5px 1px 0px rgba(0, 0, 0, 0.50);
-    border-radius: 8px;
-    cursor: pointer;
+.artistVerse {
+    font-size: 11px;
+    opacity: 0.75;
 }
-
+.InfoVerse.empty {
+    display: block;
+    margin: auto;
+    padding: 1em;
+    font-size: 13px;
+    text-align: center;
+}
